@@ -62,6 +62,5 @@ jobs:
         uses: maxheld83/ghpages@v0.3.0
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' && github.repository == 'baileythegreen/genomics-r-intro' }}
         env:
-          token: ${{ secrets.SECRET_KEY }}
+          GH_PAT: ${{ secrets.GH_PAT}}
           BUILD_DIR: _rendered/
-          BRANCH: gh-pages
