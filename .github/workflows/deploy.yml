@@ -61,6 +61,7 @@ jobs:
       - name: Deploy site
         uses: maxheld83/ghpages@v0.3.0
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' && github.repository == 'baileythegreen/genomics-r-intro' }}
+        run: echo $GITHUB_SHA >> public/inex.html
         env:
           GH_PAT: ${{ secrets.GH_PAT}}
           BUILD_DIR: _rendered/
