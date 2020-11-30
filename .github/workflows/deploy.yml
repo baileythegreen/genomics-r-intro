@@ -58,8 +58,6 @@ jobs:
           mkdir _rendered
           cp -r `ls -A | grep -v '.git' | grep -v '_rendered' | grep -v '_site'` _rendered
 
-      - run: echo $GITHUB_SHA >> public/index.html
-
       - name: Deploy site
         uses: maxheld83/ghpages@v0.3.0
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' && github.repository == 'baileythegreen/genomics-r-intro' }}
