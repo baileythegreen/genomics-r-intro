@@ -9,16 +9,14 @@ jobs:
   build:
     runs-on: ubuntu-18.04
     env:
-      GH_TOKEN: ${{ secrets.SECRET_KEY}}
+      GITHUB_PAT: ${{ secrets.GH_PAT }}
       RSPM: 'https://packagemanager.rstudio.com/cran/__linux__/bionic/latest'
-      
+
     steps:
 
       - name: Checkout repo
         uses: actions/checkout@v2
-        with:
-          persist.credentials: false
-          
+
       - name: Setup R
         uses: r-lib/actions/setup-r@master
         with:
@@ -51,16 +49,14 @@ jobs:
           do
             eval sudo $cmd
           done < <(Rscript -e 'cat(remotes::system_requirements("ubuntu", "18.04"), sep = "\n")')
-
       - name: Build site
         run: |
           make lesson-md
           mkdir _rendered
           cp -r `ls -A | grep -v '.git' | grep -v '_rendered' | grep -v '_site'` _rendered
-
       - name: Deploy site
         uses: maxheld83/ghpages@v0.3.0
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' && github.repository == 'baileythegreen/genomics-r-intro' }}
         env:
-          GH_PAT: ${{ secrets.GH_PAT}}
           BUILD_DIR: _rendered/
+          GH_PAT: ${{ secrets.GH_PAT }}
