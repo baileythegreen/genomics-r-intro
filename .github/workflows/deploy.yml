@@ -9,7 +9,7 @@ jobs:
   build:
     runs-on: ubuntu-18.04
     env:
-      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      GH_TOKEN: ${{ secrets.SECRET_KEY}}
       RSPM: 'https://packagemanager.rstudio.com/cran/__linux__/bionic/latest'
       
     steps:
