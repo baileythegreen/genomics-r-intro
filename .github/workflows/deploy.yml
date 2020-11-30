@@ -16,7 +16,9 @@ jobs:
 
       - name: Checkout repo
         uses: actions/checkout@v2
-
+        with:
+          persist.credentials: false
+          
       - name: Setup R
         uses: r-lib/actions/setup-r@master
         with:
@@ -60,5 +62,6 @@ jobs:
         uses: maxheld83/ghpages@v0.3.0
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' && github.repository == 'baileythegreen/genomics-r-intro' }}
         env:
+          token: ${{ secrets.SECRET_KEY }}
           BUILD_DIR: _rendered/
           BRANCH: gh-pages
