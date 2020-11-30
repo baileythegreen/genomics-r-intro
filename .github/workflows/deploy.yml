@@ -61,5 +61,4 @@ jobs:
         if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' && github.repository == 'baileythegreen/genomics-r-intro' }}
         env:
           BUILD_DIR: _rendered/
-          GITHUB_TOKEN: ${{secrets.SECRET_KEY }}
           BRANCH: gh-pages
